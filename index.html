@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Protegida</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+    #password-form, #congratulations {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      display: none;
+    }
+    #password-form {
+      display: block;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #message {
+      color: red;
+      display: none;
+    }
+    /* Estilos de los globos */
+    .balloon {
+      width: 50px;
+      height: 70px;
+      background-color: #FF6B6B;
+      border-radius: 50% 50% 50% 50% / 60% 60% 100% 100%;
+      position: absolute;
+      bottom: 0;
+      animation: float 5s ease-in-out infinite;
+    }
+    .balloon:nth-child(2) { background-color: #6BCBFF; animation-delay: 1s; }
+    .balloon:nth-child(3) { background-color: #FFD93D; animation-delay: 2s; }
+    .balloon:nth-child(4) { background-color: #B5E48C; animation-delay: 3s; }
+    .balloon:nth-child(5) { background-color: #D4A5A5; animation-delay: 4s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-400px) translateX(-30px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="password-form">
+  <h2>Introduce la contraseña para acceder</h2>
+  <input type="password" id="password" placeholder="Contraseña">
+  <button onclick="checkPassword()">Entrar</button>
+  <p id="message">Contraseña incorrecta. Intenta de nuevo.</p>
+</div>
+
+<div id="congratulations">
+  <h2>¡Felicidades! Te ganaste tu respuesta</h2>
+  <div id="balloons">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+  </div>
+</div>
+
+<script>
+  function checkPassword() {
+    const password = document.getElementById("password").value;
+    if (password === "170823") {
+      document.getElementById("password-form").style.display = "none";
+      document.getElementById("congratulations").style.display = "block";
+    } else {
+      document.getElementById("message").style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>
