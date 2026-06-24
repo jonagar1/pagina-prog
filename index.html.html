@@ -1,0 +1,123 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fecha</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(180deg,#050816,#0b1026,#151a35);
+    overflow:hidden;
+    color:white;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:
+    radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size:50px 50px;
+    animation:mover 40s linear infinite;
+    opacity:.4;
+}
+
+@keyframes mover{
+    from{transform:translateY(0);}
+    to{transform:translateY(-100px);}
+}
+
+.contenedor{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:40px;
+    backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    width:90%;
+    max-width:700px;
+}
+
+h1{
+    font-size:2rem;
+    font-weight:300;
+    color:#d6defa;
+    margin-bottom:10px;
+}
+
+.frase{
+    color:#9ca8d3;
+    font-style:italic;
+    margin-bottom:30px;
+}
+
+#timer{
+    font-size:2.8rem;
+    font-weight:600;
+    color:#ffffff;
+    text-shadow:0 0 15px rgba(180,200,255,.3);
+}
+
+.fecha{
+    margin-top:20px;
+    color:#7f8cb6;
+    font-size:.9rem;
+}
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h1>Cuenta Regresiva</h1>
+    <p class="frase">"..."</p>
+
+    <div id="timer">Cargando...</div>
+
+    <div class="fecha">
+        28 de junio de 2026 • 8:00 PM
+    </div>
+</div>
+
+<script>
+const fechaLimite = new Date("2026-06-28T20:00:00").getTime();
+
+function actualizar() {
+    const ahora = new Date().getTime();
+    const diferencia = fechaLimite - ahora;
+
+    if (diferencia <= 0) {
+        document.getElementById("timer").innerHTML =
+        "⏳ El tiempo ha terminado";
+        return;
+    }
+
+    const dias = Math.floor(diferencia / (1000*60*60*24));
+    const horas = Math.floor((diferencia % (1000*60*60*24)) / (1000*60*60));
+    const minutos = Math.floor((diferencia % (1000*60*60)) / (1000*60));
+    const segundos = Math.floor((diferencia % (1000*60)) / 1000);
+
+    document.getElementById("timer").innerHTML =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+}
+
+actualizar();
+setInterval(actualizar, 1000);
+</script>
+
+</body>
+</html>
